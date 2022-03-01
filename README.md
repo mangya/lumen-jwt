@@ -1,6 +1,6 @@
 # Lumen JWT
 
-JWT Authenticated API with Lumen (v8.x)
+Lumen (v8.x) API boilerplate with JSON Web Token Authentication
 
 ## Prerequisites
 
@@ -22,6 +22,30 @@ JWT Authenticated API with Lumen (v8.x)
 6. Create database tables and sample data with `php artisan migrate:refresh --seed`
 7. Run the application with `php -S localhost:8000 -t public` (MySQL service should be up and running).
 8. Access `http://localhost:8000` and you're ready to go!
+
+## API Endpoints
+
+#### Register
+```http
+POST /api/register
+```
+| Parameter | Type | Description |
+| :--- | :--- | :--- |
+| `name` | `string` | **Required**. Your Name |
+| `email` | `string` | **Required**. Your Email |
+| `password` | `string` | **Required**. Your Password |
+| `password_confirmation` | `string` | **Required**. Same as password |
+
+#### Login
+```http
+POST /api/login
+```
+| Parameter | Type | Description |
+| :--- | :--- | :--- |
+| `email` | `string` | **Required**. Your Email |
+| `password` | `string` | **Required**. Your Password |
+
+All API requests under `auth` middleware require a bearer roken in the Authorization header.
 
 ## License
 
