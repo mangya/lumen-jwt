@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class AuthController extends Controller
 {
@@ -55,5 +56,14 @@ class AuthController extends Controller
         }
 
         return $this->respondWithToken($token);
+    }
+
+    public function mail() {
+        $data = array('name'=>'John');
+        Mail::send('emails.mail', $data, function($message) {
+            $message->to('test@test.com', 'John')->subject('Test Mail from John');
+            $message->from('test@test.com','John');
+        });
+        echo 'Email Sent. Check your inbox.';
     }
 }

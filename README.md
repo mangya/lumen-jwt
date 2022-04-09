@@ -51,6 +51,6 @@ All API requests under `auth` middleware require a bearer roken in the Authoriza
 
 The Lumen JWT is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
 
-<img alt="Laravel" src="https://img.shields.io/badge/lumen-%23FF2D20.svg?&style=for-the-badge&logo=lumen&logoColor=white"/><img alt="MySQL" src="https://img.shields.io/badge/MySQL-00000F?style=for-the-badge&logo=mysql&logoColor=white"/><img alt="JQuery" src="https://img.shields.io/badge/jQuery-0769AD?style=for-the-badge&logo=jquery&logoColor=white"/>
+<img alt="Laravel" src="https://img.shields.io/badge/lumen-%23FF2D20.svg?&style=for-the-badge&logo=lumen&logoColor=white"/><img alt="MySQL" src="https://img.shields.io/badge/MySQL-00000F?style=for-the-badge&logo=mysql&logoColor=white"/><img alt="PHP" src="https://img.shields.io/badge/PHP-777BB4?style=for-the-badge&logo=php&logoColor=white"/>
 
 Thank you 😊
