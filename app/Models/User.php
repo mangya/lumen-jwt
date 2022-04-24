@@ -20,7 +20,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      * @var array
      */
     protected $fillable = [
-        'name', 'email',
+        'name', 'email', 'password'
     ];
 
     /**
@@ -31,33 +31,6 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     protected $hidden = [
         'password','email_confirmation_code'
     ];
-
-    /**
-     * Validation rules for new user registration
-     * 
-     * @return Array
-     */
-    public static function getUserRegistrationValidationRules() 
-    {
-        return [
-            'name' => 'required|string',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|confirmed',
-        ];
-    }
-
-    /**
-     * Validation rules for user login
-     * 
-     * @return Array
-     */
-    public static function getUserLoginValidationRules() 
-    {
-        return [
-            'email' => 'required|string',
-            'password' => 'required|string',
-        ];
-    }
 
     /**
      * Get the identifier that will be stored in the subject claim of the JWT.

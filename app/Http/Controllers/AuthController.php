@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Exception;
-use App\Models\User;
+use App\Services\UserService;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
@@ -12,6 +12,16 @@ use Illuminate\Support\Facades\Mail;
 class AuthController extends Controller
 {
     /**
+     * @var UserService
+     */
+    private $userService;
+
+    public function __construct(UserService $userService)
+    {
+        $this->userService = $userService;
+    }
+
+    /**
      * Store a new user.
      *
      * @param  Request  $request
@@ -19,17 +29,15 @@ class AuthController extends Controller
      */
     public function register(Request $request)
     {
-        $this->validate($request, User::getUserRegistrationValidationRules());
+        $this->validate($request, $this->userService->getUserRegistrationValidationRules());
 
         try {
 
-            $user = new User;
-            $user->name = $request->input('name');
-            $user->email = $request->input('email');
+            $attributes['name'] = $request->input('name');
+            $attributes['email'] = $request->input('email');
             $plainPassword = $request->input('password');
-            $user->password = app('hash')->make($plainPassword);
-
-            $user->save();
+            $attributes['password'] = app('hash')->make($plainPassword);
+            $user = $this->userService->create($attributes);
 
             return response()->json(['user' => $user, 'message' => 'CREATED'], Response::HTTP_CREATED);
 
@@ -47,7 +55,7 @@ class AuthController extends Controller
     public function login(Request $request)
     {
           //validate incoming request 
-        $this->validate($request, User::getUserLoginValidationRules());
+        $this->validate($request, $this->userService->getUserLoginValidationRules());
 
         $credentials = $request->only(['email', 'password']);
 
