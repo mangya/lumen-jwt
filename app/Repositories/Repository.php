@@ -72,4 +72,25 @@ class Repository implements RepositoryInterface
             ->where($attributes)
             ->delete();
     }
+
+    /**
+     * @param  array  $attributes
+     */
+    public function getOneByAttributes(array $attributes)
+    {
+        return $this->model->where($attributes)->first();
+    }
+
+    /**
+     * @param  array  $attributes
+     */
+    public function getAllByAttributes(array $attributes = [])
+    {
+        $user = $this->model;
+        if(empty($attributes)) {
+            $user = $user->where($attributes);
+        }
+        
+        return $user->get();
+    }
 }

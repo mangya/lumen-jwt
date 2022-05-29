@@ -3,19 +3,24 @@
 namespace App\Http\Controllers;
 
 use Exception;
-use App\Models\User;
+use App\Services\UserService;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
     /**
+     * @var UserService
+     */
+    private $userService;
+
+    /**
      * Instantiate a new UserController instance.
      *
-     * @return void
      */
-    public function __construct()
+    public function __construct(UserService $userService)
     {
+        $this->userService = $userService;
     }
 
     /**
@@ -35,7 +40,7 @@ class UserController extends Controller
      */
     public function allUsers()
     {
-         return response()->json(['users' =>  User::all()], Response::HTTP_OK);
+         return response()->json(['users' =>  $this->userService->getAll()], Response::HTTP_OK);
     }
 
     /**
@@ -43,10 +48,10 @@ class UserController extends Controller
      *
      * @return Response
      */
-    public function singleUser($id)
+    public function get(int $id)
     {
         try {
-            $user = User::findOrFail($id);
+            $user = $this->userService->getByAttributes(['id' => $id]);
 
             return response()->json(['user' => $user], Response::HTTP_OK);
 

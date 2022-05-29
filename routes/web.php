@@ -24,7 +24,7 @@ $router->group(['prefix' => 'api'], function () use ($router) {
 
     $router->group(['middleware' => ['auth']], function () use ($router) {
         $router->get('profile', 'UserController@profile');
-        $router->get('users/{id}', 'UserController@singleUser');
+        $router->get('users/{id}', 'UserController@get');
         $router->get('users', 'UserController@allUsers');
     });
 });

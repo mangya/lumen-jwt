@@ -22,6 +22,31 @@ class UserService
         $this->userRepository = $userRepository;
     }
 
+    /**
+     * Get one user as per the attributes
+     * 
+     * @param  array  $attributes
+     */
+    public function getByAttributes(array $attributes)
+    {
+        return $this->userRepository->getOneByAttributes($attributes);
+    }
+
+    /**
+     * Get all users matching the attributes
+     * 
+     * @param  array  $attributes
+     */
+    public function getAll(array $attributes = [])
+    {
+        return $this->userRepository->getAllByAttributes($attributes);
+    }
+
+    /**
+     * Create user
+     * 
+     * @param  array  $attributes
+     */
     public function create(array $attributes)
     {
     	return $this->userRepository->create($attributes);
@@ -32,7 +57,7 @@ class UserService
      * 
      * @return Array
      */
-    public static function getUserRegistrationValidationRules() 
+    public static function getUserRegistrationValidationRules(): array
     {
         return [
             'name' => 'required|string',
@@ -46,7 +71,7 @@ class UserService
      * 
      * @return Array
      */
-    public static function getUserLoginValidationRules() 
+    public static function getUserLoginValidationRules(): array
     {
         return [
             'email' => 'required|string',
